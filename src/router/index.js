@@ -1,7 +1,6 @@
-// src/router/index.js
-
 import Vue from 'vue';
 import Router from 'vue-router';
+import Home from '@/components/Home.vue'; // 导入 Home 组件
 
 // Agriculture Loan Components
 import GroupManagement from '@/components/AgricultureLoan/CustomerManagement/GroupManagement.vue';
@@ -9,17 +8,20 @@ import GroupAgreement from '@/components/AgricultureLoan/CustomerManagement/Grou
 
 import CustomerArchiving from '@/components/AgricultureLoan/LoanBusiness/CustomerArchiving.vue';
 import RatingAndCredit from '@/components/AgricultureLoan/LoanBusiness/RatingAndCredit.vue';
-import CreditLedger from '@/components/AgricultureLoan/LoanBusiness/CreditManagement/CreditLedger.vue';
-import CreditAdjustmentIncrease from '@/components/AgricultureLoan/LoanBusiness/CreditManagement/CreditAdjustmentIncrease.vue';
-import CreditAdjustmentDecrease from '@/components/AgricultureLoan/LoanBusiness/CreditManagement/CreditAdjustmentDecrease.vue';
-import CreditFreeze from '@/components/AgricultureLoan/LoanBusiness/CreditManagement/CreditFreeze.vue';
-import AnnualReviewAuto from '@/components/AgricultureLoan/LoanBusiness/AnnualReview/AnnualReviewAuto.vue';
-import AnnualReviewManual from '@/components/AgricultureLoan/LoanBusiness/AnnualReview/AnnualReviewManual.vue';
-import CreditLoanApplication from '@/components/AgricultureLoan/LoanBusiness/BusinessApplication/CreditLoanApplication.vue';
-import GuaranteeLoanApplication from '@/components/AgricultureLoan/LoanBusiness/BusinessApplication/GuaranteeLoanApplication.vue';
-import RenewalApplication from '@/components/AgricultureLoan/LoanBusiness/BusinessApplication/RenewalApplication.vue';
-import ExtensionApplication from '@/components/AgricultureLoan/LoanBusiness/BusinessApplication/ExtensionApplication.vue';
-import RestructuringApplication from '@/components/AgricultureLoan/LoanBusiness/BusinessApplication/RestructuringApplication.vue';
+import AgricultureLoanOverview from '@/components/AgricultureLoan/LoanBusiness/AgricultureLoanOverview.vue'; // 导入概览组件
+
+// 注释掉已计划但未实现的组件导入
+// import CreditLedger from '@/components/AgricultureLoan/LoanBusiness/CreditManagement/CreditLedger.vue';
+// import CreditAdjustmentIncrease from '@/components/AgricultureLoan/LoanBusiness/CreditManagement/CreditAdjustmentIncrease.vue';
+// import CreditAdjustmentDecrease from '@/components/AgricultureLoan/LoanBusiness/CreditManagement/CreditAdjustmentDecrease.vue';
+// import CreditFreeze from '@/components/AgricultureLoan/LoanBusiness/CreditManagement/CreditFreeze.vue';
+// import AnnualReviewAuto from '@/components/AgricultureLoan/LoanBusiness/AnnualReview/AnnualReviewAuto.vue';
+// import AnnualReviewManual from '@/components/AgricultureLoan/LoanBusiness/AnnualReview/AnnualReviewManual.vue';
+// import CreditLoanApplication from '@/components/AgricultureLoan/LoanBusiness/BusinessApplication/CreditLoanApplication.vue';
+// import GuaranteeLoanApplication from '@/components/AgricultureLoan/LoanBusiness/BusinessApplication/GuaranteeLoanApplication.vue';
+// import RenewalApplication from '@/components/AgricultureLoan/LoanBusiness/BusinessApplication/RenewalApplication.vue';
+// import ExtensionApplication from '@/components/AgricultureLoan/LoanBusiness/BusinessApplication/ExtensionApplication.vue';
+// import RestructuringApplication from '@/components/AgricultureLoan/LoanBusiness/BusinessApplication/RestructuringApplication.vue';
 
 // Personal Loan Components
 import LoanExtension from '@/components/PersonalLoan/LoanManagement/LoanExtension.vue';
@@ -38,8 +40,15 @@ export default new Router({
   mode: 'history',
   routes: [
     {
+      path: '/',
+      name: 'Home',
+      component: Home,
+      meta: { title: '首页' }
+    },
+    {
       path: '/agriculture-loan',
       name: 'AgricultureLoan',
+      component: AgricultureLoanOverview, // 默认展示农贷业务概览页面
       meta: { title: '农贷业务' },
       children: [
         {
@@ -65,6 +74,7 @@ export default new Router({
           path: 'loan-business',
           name: 'LoanBusiness',
           meta: { title: '农贷业务' },
+          component: AgricultureLoanOverview, // 在 loan-business 路径下展示概览页面
           children: [
             {
               path: 'customer-archiving',
@@ -77,93 +87,6 @@ export default new Router({
               name: 'RatingAndCredit',
               component: RatingAndCredit,
               meta: { title: '评级授信' }
-            },
-            {
-              path: 'credit-management',
-              name: 'CreditManagement',
-              meta: { title: '额度管理' },
-              children: [
-                {
-                  path: 'credit-ledger',
-                  name: 'CreditLedger',
-                  component: CreditLedger,
-                  meta: { title: '授信台账' }
-                },
-                {
-                  path: 'credit-adjustment-increase',
-                  name: 'CreditAdjustmentIncrease',
-                  component: CreditAdjustmentIncrease,
-                  meta: { title: '额度调增' }
-                },
-                {
-                  path: 'credit-adjustment-decrease',
-                  name: 'CreditAdjustmentDecrease',
-                  component: CreditAdjustmentDecrease,
-                  meta: { title: '额度调减' }
-                },
-                {
-                  path: 'credit-freeze',
-                  name: 'CreditFreeze',
-                  component: CreditFreeze,
-                  meta: { title: '额度冻结/解冻/注销' }
-                }
-              ]
-            },
-            {
-              path: 'annual-review',
-              name: 'AnnualReview',
-              meta: { title: '农户年审' },
-              children: [
-                {
-                  path: 'annual-review-auto',
-                  name: 'AnnualReviewAuto',
-                  component: AnnualReviewAuto,
-                  meta: { title: '系统自动年审' }
-                },
-                {
-                  path: 'annual-review-manual',
-                  name: 'AnnualReviewManual',
-                  component: AnnualReviewManual,
-                  meta: { title: '人工年审' }
-                }
-              ]
-            },
-            {
-              path: 'business-application',
-              name: 'BusinessApplication',
-              meta: { title: '业务申请' },
-              children: [
-                {
-                  path: 'credit-loan-application',
-                  name: 'CreditLoanApplication',
-                  component: CreditLoanApplication,
-                  meta: { title: '农户信用贷款申请' }
-                },
-                {
-                  path: 'guarantee-loan-application',
-                  name: 'GuaranteeLoanApplication',
-                  component: GuaranteeLoanApplication,
-                  meta: { title: '担保类农贷业务申请' }
-                },
-                {
-                  path: 'renewal-application',
-                  name: 'RenewalApplication',
-                  component: RenewalApplication,
-                  meta: { title: '农户续贷申请' }
-                },
-                {
-                  path: 'extension-application',
-                  name: 'ExtensionApplication',
-                  component: ExtensionApplication,
-                  meta: { title: '农户展期申请' }
-                },
-                {
-                  path: 'restructuring-application',
-                  name: 'RestructuringApplication',
-                  component: RestructuringApplication,
-                  meta: { title: '农户重组申请' }
-                }
-              ]
             }
           ]
         }
@@ -241,7 +164,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: '/agriculture-loan'
+      redirect: '/'
     }
   ]
 });
