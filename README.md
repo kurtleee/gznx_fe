@@ -1,3 +1,4 @@
+![CodeQL](https://github.com/kurtleee/gznx_fe/actions/workflows/codeql.yml/badge.svg)
 ### 一级菜单设计
 1. **农贷业务**
 2. **个贷业务**
