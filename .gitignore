@@ -128,3 +128,47 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Updated by @Kurt LEE on Spet 3 2024
+# 忽略node_modules目录
+node_modules/
+
+# 忽略打包后的文件
+dist/
+
+# 忽略本地开发环境配置文件
+.env.local
+.env.*.local
+
+# 忽略日志文件
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 忽略VSCode编辑器相关的文件
+.vscode/
+
+# 忽略IDE或编辑器产生的配置文件
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# 忽略Mac系统产生的文件
+.DS_Store
+
+# 忽略Thumbs.db文件（Windows系统）
+Thumbs.db
+
+# 忽略临时文件
+*.swp
+*.swo
+
+# 忽略自定义的配置文件
+*.local
+*.log
+
+# 忽略公共缓存文件
+/public/cache/
+
