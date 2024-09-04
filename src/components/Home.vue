@@ -11,7 +11,7 @@
     name: 'Home',
     methods: {
       goToDashboard() {
-        this.$router.push('/agriculture-loan/loan-business'); // 跳转到农贷业务页面
+        this.$router.push('/index'); // 跳转到index页面
       }
     }
   };

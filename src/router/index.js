@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/components/Home.vue'; // 导入 Home 组件
-
+import Index from '@/components/Index.vue'; // 导入 Index 组件
 // Agriculture Loan Components
 import GroupManagement from '@/components/AgricultureLoan/CustomerManagement/GroupManagement.vue';
 import GroupAgreement from '@/components/AgricultureLoan/CustomerManagement/GroupAgreement.vue';
@@ -46,117 +46,126 @@ export default new Router({
       meta: { title: '首页' }
     },
     {
-      path: '/agriculture-loan',
-      name: 'AgricultureLoan',
-      component: AgricultureLoanOverview, // 默认展示农贷业务概览页面
-      meta: { title: '农贷业务' },
+      path: '/index',
+      name: 'Index',
+      component: Index,
+      redirect: '/agriculture-loan',
+      meta: { title: '首首页' },
       children: [
         {
-          path: 'customer-management',
-          name: 'CustomerManagement',
-          meta: { title: '客户管理' },
+          path: '/agriculture-loan',
+          name: 'AgricultureLoan',
+          component: AgricultureLoanOverview, // 默认展示农贷业务概览页面
+          meta: { title: '农贷业务' },
           children: [
             {
-              path: 'group-management',
-              name: 'GroupManagement',
-              component: GroupManagement,
-              meta: { title: '联保小组申请' }
+              path: 'customer-management',
+              name: 'CustomerManagement',
+              meta: { title: '客户管理' },
+              children: [
+                {
+                  path: 'group-management',
+                  name: 'GroupManagement',
+                  component: GroupManagement,
+                  meta: { title: '联保小组申请' }
+                },
+                {
+                  path: 'group-agreement',
+                  name: 'GroupAgreement',
+                  component: GroupAgreement,
+                  meta: { title: '联保小组协议' }
+                }
+              ]
             },
             {
-              path: 'group-agreement',
-              name: 'GroupAgreement',
-              component: GroupAgreement,
-              meta: { title: '联保小组协议' }
+              path: 'loan-business',
+              name: 'LoanBusiness',
+              meta: { title: '农贷业务' },
+              component: AgricultureLoanOverview, // 在 loan-business 路径下展示概览页面
+              children: [
+                {
+                  path: 'customer-archiving',
+                  name: 'CustomerArchiving',
+                  component: CustomerArchiving,
+                  meta: { title: '客户建档' }
+                },
+                {
+                  path: 'rating-and-credit',
+                  name: 'RatingAndCredit',
+                  component: RatingAndCredit,
+                  meta: { title: '评级授信' }
+                }
+              ]
             }
           ]
         },
         {
-          path: 'loan-business',
-          name: 'LoanBusiness',
-          meta: { title: '农贷业务' },
-          component: AgricultureLoanOverview, // 在 loan-business 路径下展示概览页面
+          path: '/personal-loan',
+          name: 'PersonalLoan',
+          meta: { title: '个贷业务' },
           children: [
             {
-              path: 'customer-archiving',
-              name: 'CustomerArchiving',
-              component: CustomerArchiving,
-              meta: { title: '客户建档' }
-            },
-            {
-              path: 'rating-and-credit',
-              name: 'RatingAndCredit',
-              component: RatingAndCredit,
-              meta: { title: '评级授信' }
+              path: 'loan-management',
+              name: 'LoanManagement',
+              meta: { title: '贷款管理' },
+              children: [
+                {
+                  path: 'loan-extension',
+                  name: 'LoanExtension',
+                  component: LoanExtension,
+                  meta: { title: '贷款展期' }
+                },
+                {
+                  path: 'credit-adjustment',
+                  name: 'CreditAdjustment',
+                  component: CreditAdjustment,
+                  meta: { title: '额度调整' }
+                }
+              ]
             }
           ]
-        }
-      ]
-    },
-    {
-      path: '/personal-loan',
-      name: 'PersonalLoan',
-      meta: { title: '个贷业务' },
-      children: [
+        },
         {
-          path: 'loan-management',
-          name: 'LoanManagement',
-          meta: { title: '贷款管理' },
+          path: '/post-loan-management',
+          name: 'PostLoanManagement',
+          meta: { title: '贷后管理' },
           children: [
             {
-              path: 'loan-extension',
-              name: 'LoanExtension',
-              component: LoanExtension,
-              meta: { title: '贷款展期' }
-            },
-            {
-              path: 'credit-adjustment',
-              name: 'CreditAdjustment',
-              component: CreditAdjustment,
-              meta: { title: '额度调整' }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      path: '/post-loan-management',
-      name: 'PostLoanManagement',
-      meta: { title: '贷后管理' },
-      children: [
-        {
-          path: 'task-management',
-          name: 'TaskManagement',
-          meta: { title: '任务管理' },
-          children: [
-            {
-              path: 'task-statistics',
-              name: 'TaskStatistics',
-              component: TaskStatistics,
-              meta: { title: '任务统计' }
-            },
-            {
-              path: 'post-loan-visit',
-              name: 'PostLoanVisit',
-              component: PostLoanVisit,
-              meta: { title: '贷后回访' }
-            },
-            {
-              path: 'post-loan-inspection',
-              name: 'PostLoanInspection',
-              component: PostLoanInspection,
-              meta: { title: '贷后检查' }
-            },
-            {
-              path: 'collection-management',
-              name: 'CollectionManagement',
-              component: CollectionManagement,
-              meta: { title: '催收管理' }
-            },
-            {
-              path: 'risk-warning',
-              name: 'RiskWarning',
-              component: RiskWarning,
-              meta: { title: '风险预警' }
+              path: 'task-management',
+              name: 'TaskManagement',
+              meta: { title: '任务管理' },
+              children: [
+                {
+                  path: 'task-statistics',
+                  name: 'TaskStatistics',
+                  component: TaskStatistics,
+                  meta: { title: '任务统计' }
+                },
+                {
+                  path: 'post-loan-visit',
+                  name: 'PostLoanVisit',
+                  component: PostLoanVisit,
+                  meta: { title: '贷后回访' }
+                },
+                {
+                  path: 'post-loan-inspection',
+                  name: 'PostLoanInspection',
+                  component: PostLoanInspection,
+                  meta: { title: '贷后检查' }
+                },
+                {
+                  path: 'collection-management',
+                  name: 'CollectionManagement',
+                  component: CollectionManagement,
+                  meta: { title: '催收管理' }
+                },
+                {
+                  path: 'risk-warning',
+                  name: 'RiskWarning',
+                  component: RiskWarning,
+                  meta: { title: '风险预警' }
+                }
+              ]
             }
           ]
         }
@@ -167,4 +176,5 @@ export default new Router({
       redirect: '/'
     }
   ]
+
 });
