@@ -33,6 +33,9 @@ import PostLoanVisit from '@/components/PostLoanManagement/TaskManagement/PostLo
 import PostLoanInspection from '@/components/PostLoanManagement/TaskManagement/PostLoanInspection.vue';
 import CollectionManagement from '@/components/PostLoanManagement/TaskManagement/CollectionManagement.vue';
 import RiskWarning from '@/components/PostLoanManagement/TaskManagement/RiskWarning.vue';
+import Collections from '@/components/PostLoanManagement/TaskManagement/statistics/Collections.vue';
+import CollectionsClientManager from '@/components/PostLoanManagement/TaskManagement/statistics/CollectionsClientManager.vue';
+import CollectionsClient from '@/components/PostLoanManagement/TaskManagement/statistics/CollectionsClient.vue';
 
 Vue.use(Router);
 
@@ -124,12 +127,12 @@ export default new Router({
       meta: { title: '贷后管理' },
       children: [
         {
-          path: 'task-management',
+          path: '/task-management',
           name: 'TaskManagement',
           meta: { title: '任务管理' },
           children: [
             {
-              path: 'task-statistics',
+              path: '/task-statistics',
               name: 'TaskStatistics',
               component: TaskStatistics,
               meta: { title: '任务统计' }
@@ -157,6 +160,24 @@ export default new Router({
               name: 'RiskWarning',
               component: RiskWarning,
               meta: { title: '风险预警' }
+            },
+            {
+              path: 'Collections',
+              name: 'Collections',
+              component: Collections,
+              meta: { title: '催收任务网点名称统计' }
+            },
+            {
+              path: 'CollectionsClientManager',
+              name: 'CollectionsClientManager',
+              component: CollectionsClientManager,
+              meta: { title: '催收任务客户经理统计' }
+            },
+            {
+              path: 'CollectionsClient',
+              name: 'CollectionsClient',
+              component: CollectionsClient,
+              meta: { title: '催收任务客户统计' }
             }
           ]
         }
